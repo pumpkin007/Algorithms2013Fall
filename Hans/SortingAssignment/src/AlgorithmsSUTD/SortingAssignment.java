@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+enum SortingAlgorithm {INSERTION,HEAP,MERGE,QUICK};
+
 /**
  * @author hans anderson
  *
@@ -21,6 +23,11 @@ public class SortingAssignment {
 		boolean outputToFile = true;
 	    boolean outputToConsole = true;
 	    boolean printTimingDataToConsole = true;
+	    
+	    // All 4 sorting algorithms run and record timing information 
+	    // every time the programme runs but only the one specified below
+	    // is used for output to the file "output.txt".
+	    SortingAlgorithm algorithmForOutput = SortingAlgorithm.HEAP;
 		
 		int inputLength;
 		int[] input;
@@ -77,8 +84,12 @@ public class SortingAssignment {
 	    quickTime = System.nanoTime() - startTime;
 	    if (outputToConsole) print(testQuick,    "    Quick");
 	    
+	    // only one of the four algorithms can print its result to output.txt
 	    if (outputToFile){
-	    	printToFile(testQuick,"output.txt");
+	    	if (algorithmForOutput == SortingAlgorithm.INSERTION) printToFile(testInsertion,"output.txt");
+	    	else if (algorithmForOutput == SortingAlgorithm.QUICK) printToFile(testQuick,"output.txt");
+	    	else if (algorithmForOutput == SortingAlgorithm.HEAP) printToFile(testHeap,"output.txt");
+	    	else if (algorithmForOutput == SortingAlgorithm.MERGE) printToFile(testMerge,"output.txt");
 	    }
 	    
 		if (printTimingDataToConsole) {
